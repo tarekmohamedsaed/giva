@@ -8,7 +8,13 @@ app.use('/ping', (req, res) => {
   res.send(new Date());
 });
 const Discord = require('discord.js');
-const client = new Discord.Client();
+const client = new Discord.Client({
+  ws: {
+    properties: {
+      $browser: "Discord iOS"
+    }
+  }
+});
 const { Client, Collection,MessageSelectMenu, MessageEmbed, MessageActionRow, MessageButton, MessageAttachment } = require("discord.js");
 
 const pretty = require("pretty-ms")
