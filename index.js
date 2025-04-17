@@ -24,12 +24,20 @@ client.on("ready", async() => {
 client.user.setActivity('mention me to get prefix!', { type: 'WATCHING' });
 
 });
+client.on('ready', async () => {
+  const channel = client.channels.cache.get('1361805465163403517');
 
-  client.on('ready', async() => {
-        client.channels.cache.get('1361805465163403517').join()
-          
+  if (!channel || channel.type !== 'voice') {
+    console.log('❌ الروم مش موجود أو مش روم صوتي');
+    return;
+  }
 
-        console.log("Hello Im Online")
+  try {
+    await channel.join();
+    console.log('✅ البوت دخل الروم الصوتي');
+  } catch (error) {
+    console.error('❌ حصل خطأ أثناء الدخول للروم:', error);
+  }
 });
 
 
