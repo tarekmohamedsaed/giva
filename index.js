@@ -279,4 +279,4 @@ const { settings } = require('cluster');
 
 
 
-client.login('ODE3NzMxNDIyMzk5MTAzMDE2.GCgHns.yw6o8sErNgUhhP6X_uTbaxCukucfV1ZpYYmULA');
+client.login(process.env.token);
