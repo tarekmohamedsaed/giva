@@ -31,7 +31,7 @@ const prefix = '.';
 const prefixx = prefix
 
 const test = ["771223207536623686"]
-client.on('messageCreate', async (message) => {
+client.on('message', async (message) => {
   console.log(message.content);  // عشان تتأكد إن البوت بيشوف الرسائل
 });
 
