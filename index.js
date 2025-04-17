@@ -31,7 +31,7 @@ const prefix = '.';
 const prefixx = ".";
 
 const test = ["771223207536623686"]
-client.on('message', async message => {
+client.on('messageCreate', async message => {
   
     if(message.channel.type === "dm") return;
   
@@ -53,7 +53,7 @@ db.set(`loa_${message.author.id}_${message.guild.id}`,args.join(" "))
 //
 
 const men = "**\@eveyone**"
-client.on('message', async message => {
+client.on('messageCreate', async message => {
   
     if(message.channel.type === "dm") return;
   
@@ -71,7 +71,7 @@ db.delete(`loa_${message.author.id}_${message.guild.id}`)
 })
   }
 });
-client.on('message', async message => {
+client.on('messageCreate', async message => {
   
     if(message.channel.type === "dm") return;
   
@@ -93,7 +93,7 @@ db.delete(`by_${message.guild.id}`)
 const db = require('quick.db')
 
 
-client.on('message', async message => {
+client.on('messageCreate', async message => {
   
     if(message.channel.type === "dm") return;
   
@@ -130,7 +130,7 @@ const { settings } = require('cluster');
         }
     });
     client.giveawaysManager = manager;
-    client.on('message', (message) => {
+    client.on('messageCreate', (message) => {
         const ms = require('ms'); // npm install ms
         const args = message.content.slice(prefix.length).trim().split(/ +/g);
         const command = args.shift().toLowerCase();
@@ -297,7 +297,7 @@ if (role) member.roles.remove(role).then(() => {
 }, 5000)
 })
   
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 
 let user = message.mentions.members.first()
 
@@ -392,7 +392,7 @@ TimeMute : ${pretty(mmm)}
 
 
 
-      client.on('message', async message => {
+      client.on('messageCreate', async message => {
 
    if (message.content.startsWith(prefix + 'unmute')) {
 if (!test.includes(message.author.id)) return;
@@ -444,7 +444,7 @@ TimeMute : ${pretty(mm)}\n
                                  
 })
 
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 
     if (message.content.startsWith(prefix + 'info-mute')) {
         let muteRole = message.guild.roles.cache.find(role => role.name == 'Muted');
