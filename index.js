@@ -10,8 +10,14 @@ const Discord = require('discord.js');
 
 const { Client, GatewayIntentBits } = require("discord.js");
 
-const client = new Client({
-    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]
+const client = new Discord.Client({
+  ws: {
+    intents: [
+      'GUILDS',
+      'GUILD_MESSAGES',
+      'MESSAGE_CONTENT'
+    ]
+  }
 });
 
 client.on("ready", async() => {
