@@ -28,9 +28,9 @@ client.user.setActivity('mention me to get prefix!', { type: 'WATCHING' });
 
 const prefix = '.';
 
-const prefixx = prefix
+const prefixx = ".";
 
-const test = ["1041359409391095829"]
+const test = ["771223207536623686"]
 client.on('message', async message => {
   
     if(message.channel.type === "dm") return;
@@ -38,7 +38,7 @@ client.on('message', async message => {
     const args = message.content.slice(prefixx.length).trim().split(/ +/);   
       const command = args.shift().toLowerCase();
   if (command === `set-low`) {
-    const deve = ["1041359409391095829","877484293813833761","1041359409391095829"]
+    const deve = ["1041359409391095829","771223207536623686","1361764207028207656"]
 
             if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
 
