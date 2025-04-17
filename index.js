@@ -8,24 +8,24 @@ app.use('/ping', (req, res) => {
 });
 const Discord = require('discord.js');
 
-const { Client, GatewayIntentBits } = require("discord.js");
-
-const client = new Discord.Client({
-  ws: {
-    intents: [
-      'GUILDS',
-      'GUILD_MESSAGES',
-    ]
-  }
+const { Client, GatewayIntentBits } = require('discord.js');
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildVoiceStates
+  ]
 });
 
-client.on("ready", async() => {
+
+client.on("messageCreate", async() => {
         console.log(`I 'm online!`)
 client.user.setActivity('mention me to get prefix!', { type: 'WATCHING' });
 
 });
 
-client.on('message', message => {
+client.on('messageCreate', message => {
   if (message.author.bot) return;
 
   if (message.content === prefix + 'ping') {
@@ -33,7 +33,7 @@ client.on('message', message => {
     message.channel.send(`🏓 Pong! \`${ping}ms\``);
   }
 });
-client.on('message', message => {
+client.on('messageCreate', message => {
   if (message.author.bot) return;
 
   if (message.content) {
