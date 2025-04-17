@@ -42,19 +42,19 @@ client.on('message', message => {
 });
 
 client.on('ready', async () => {
-  const channel = client.channels.cache.get('1361805465163403517');
+ const guild = client.guilds.cache.get('1361805464735580231'); // ID السيرفر
+  if (!guild) return console.error('❌ السيرفر مش موجود أو البوت مش فيه.');
 
-  if (!channel || channel.type !== 'voice') {
-    console.log('❌ الروم مش موجود أو مش روم صوتي');
-    return;
-  }
+  const channel = guild.channels.cache.get('1361805465163403517'); // ID الروم الصوتي
+  if (!channel || channel.type !== 'voice') return console.error('❌ الروم مش صوتي أو مش موجود.');
 
-  try {
-    await channel.join();
-    console.log('✅ البوت دخل الروم الصوتي');
-  } catch (error) {
-    console.error('❌ حصل خطأ أثناء الدخول للروم:', error);
-  }
+  channel.join()
+    .then(connection => {
+      console.log('✅ دخلت الروم الصوتي بنجاح!');
+    })
+    .catch(err => {
+      console.error('❌ حصل خطأ أثناء الدخول للروم:', err);
+    });
 });
 
 
