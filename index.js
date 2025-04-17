@@ -31,7 +31,11 @@ const prefix = '.';
 const prefixx = prefix
 
 const test = ["771223207536623686"]
-client.on('message', async message => {
+client.on('messageCreate', async (message) => {
+  console.log(message.content);  // عشان تتأكد إن البوت بيشوف الرسائل
+});
+
+client.on('messageCreate', async message => {
   
     if(message.channel.type === "dm") return;
   
