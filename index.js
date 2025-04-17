@@ -28,17 +28,17 @@ client.user.setActivity('mention me to get prefix!', { type: 'WATCHING' });
 
 const prefix = '.';
 
-const prefixx = ".";
+const prefixx = prefix
 
-const test = ["771223207536623686"]
-client.on('messageCreate', async message => {
+const test = ["790598733771309076"]
+client.on('message', async message => {
   
     if(message.channel.type === "dm") return;
   
     const args = message.content.slice(prefixx.length).trim().split(/ +/);   
       const command = args.shift().toLowerCase();
   if (command === `set-low`) {
-    const deve = ["1041359409391095829","771223207536623686","1361764207028207656"]
+    const deve = ["790598733771309076","877484293813833761","792453054150082560"]
 
             if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
 
@@ -53,7 +53,7 @@ db.set(`loa_${message.author.id}_${message.guild.id}`,args.join(" "))
 //
 
 const men = "**\@eveyone**"
-client.on('messageCreate', async message => {
+client.on('message', async message => {
   
     if(message.channel.type === "dm") return;
   
@@ -71,7 +71,7 @@ db.delete(`loa_${message.author.id}_${message.guild.id}`)
 })
   }
 });
-client.on('messageCreate', async message => {
+client.on('message', async message => {
   
     if(message.channel.type === "dm") return;
   
@@ -93,7 +93,7 @@ db.delete(`by_${message.guild.id}`)
 const db = require('quick.db')
 
 
-client.on('messageCreate', async message => {
+client.on('message', async message => {
   
     if(message.channel.type === "dm") return;
   
@@ -130,7 +130,7 @@ const { settings } = require('cluster');
         }
     });
     client.giveawaysManager = manager;
-    client.on('messageCreate', (message) => {
+    client.on('message', (message) => {
         const ms = require('ms'); // npm install ms
         const args = message.content.slice(prefix.length).trim().split(/ +/g);
         const command = args.shift().toLowerCase();
@@ -297,7 +297,7 @@ if (role) member.roles.remove(role).then(() => {
 }, 5000)
 })
   
-client.on('messageCreate', async message => {
+client.on('message', async message => {
 
 let user = message.mentions.members.first()
 
@@ -392,7 +392,7 @@ TimeMute : ${pretty(mmm)}
 
 
 
-      client.on('messageCreate', async message => {
+      client.on('message', async message => {
 
    if (message.content.startsWith(prefix + 'unmute')) {
 if (!test.includes(message.author.id)) return;
@@ -444,7 +444,7 @@ TimeMute : ${pretty(mm)}\n
                                  
 })
 
-client.on('messageCreate', async message => {
+client.on('message', async message => {
 
     if (message.content.startsWith(prefix + 'info-mute')) {
         let muteRole = message.guild.roles.cache.find(role => role.name == 'Muted');
