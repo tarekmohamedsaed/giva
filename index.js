@@ -24,6 +24,23 @@ client.on("ready", async() => {
 client.user.setActivity('mention me to get prefix!', { type: 'WATCHING' });
 
 });
+
+client.on('message', message => {
+  if (message.author.bot) return;
+
+  if (message.content === prefix + 'ping') {
+    const ping = Date.now() - message.createdTimestamp;
+    message.channel.send(`🏓 Pong! \`${ping}ms\``);
+  }
+});
+client.on('message', message => {
+  if (message.author.bot) return;
+
+  if (message.content) {
+   console.log("done ["+message.content+"]")
+  }
+});
+
 client.on('ready', async () => {
   const channel = client.channels.cache.get('1361805465163403517');
 
