@@ -30,7 +30,7 @@ const prefix = '.';
 
 const prefixx = prefix
 
-const test = ["790598733771309076"]
+const test = ["1041359409391095829"]
 client.on('message', async message => {
   
     if(message.channel.type === "dm") return;
@@ -38,7 +38,7 @@ client.on('message', async message => {
     const args = message.content.slice(prefixx.length).trim().split(/ +/);   
       const command = args.shift().toLowerCase();
   if (command === `set-low`) {
-    const deve = ["790598733771309076","877484293813833761","792453054150082560"]
+    const deve = ["1041359409391095829","877484293813833761","1041359409391095829"]
 
             if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
 
