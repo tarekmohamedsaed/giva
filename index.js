@@ -10,12 +10,27 @@ const Discord = require('discord.js');
 
 const { Client, Intents } = require('discord.js');
 
+
 const client = new Client({
   intents: [
-    Intents.FLAGS.GUILDS,
-    Intents.FLAGS.GUILD_MESSAGES,
-    Intents.FLAGS.MESSAGE_CONTENT, // لو محتاج تقرأ الرسائل
-  ],
+    Intents.FLAGS.GUILDS,                      // للوصول إلى معلومات الخوادم
+    Intents.FLAGS.GUILD_MESSAGES,              // للوصول إلى الرسائل في الخوادم
+    Intents.FLAGS.MESSAGE_CONTENT,             // للوصول إلى محتوى الرسائل
+    Intents.FLAGS.GUILD_MEMBERS,               // للوصول إلى معلومات الأعضاء في الخوادم
+    Intents.FLAGS.GUILD_MEMBER_UPDATES,        // للوصول إلى تحديثات الأعضاء
+    Intents.FLAGS.GUILD_PRESENCES,             // للوصول إلى حالة الأعضاء
+    Intents.FLAGS.GUILD_VOICE_STATES,          // للوصول إلى حالة الصوت للأعضاء
+    Intents.FLAGS.GUILD_INVITES,               // للوصول إلى الدعوات في الخوادم
+    Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,   // للوصول إلى الـ Emojis والـ Stickers
+    Intents.FLAGS.GUILD_SCHEDULED_EVENTS,      // للوصول إلى الأحداث المجدولة في الخوادم
+    Intents.FLAGS.DIRECT_MESSAGES,             // للوصول إلى الرسائل الخاصة
+    Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,    // للوصول إلى ردود الفعل على الرسائل الخاصة
+    Intents.FLAGS.DIRECT_MESSAGE_TYPING,       // للوصول إلى بيانات الكتابة في الرسائل الخاصة
+    Intents.FLAGS.MESSAGE_TYPING,              // للوصول إلى الكتابة في الخوادم
+    Intents.FLAGS.GUILD_WEBHOOKS,              // للوصول إلى Webhooks في الخوادم
+    Intents.FLAGS.GUILD_BANS,                  // للوصول إلى بيانات الحظر في الخوادم
+    Intents.FLAGS.GUILD_INTEGRATIONS           // للوصول إلى Integrations مثل Twitch و YouTube
+  ]
 });
 
 
