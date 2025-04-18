@@ -581,7 +581,7 @@ client.giveawaysManager.start(message.channel, {
 }).catch(err => {
     console.error("حدث خطأ: ", err);
 });
-
+    })
 
 
 client.on("messageCreate", (message) => {
