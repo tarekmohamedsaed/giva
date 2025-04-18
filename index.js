@@ -63,9 +63,7 @@ const prefix = '..';
 const prefixx = prefix
 
 
-const prefix = '.';
 
-const prefixx = prefix
 
 const test = ["790598733771309076"]
 client.on('message', async message => {
