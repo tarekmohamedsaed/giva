@@ -169,7 +169,7 @@ const { settings } = require('cluster');
         }
     });
     client.giveawaysManager = manager;
-    client.on('message', (message) => {
+    client.on('messageCreate', (message) => {
         const ms = require('ms'); // npm install ms
         const args = message.content.slice(prefix.length).trim().split(/ +/g);
         const command = args.shift().toLowerCase();
@@ -342,7 +342,7 @@ if (role) member.roles.remove(role).then(() => {
 }, 5000)
 })
   
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 
 let user = message.mentions.members.first()
 
@@ -438,7 +438,7 @@ TimeMute : ${pretty(mmm)}
 
 
 
-      client.on('message', async message => {
+      client.on('messageCreate', async message => {
 
    if (message.content.startsWith(prefix + 'unmute')) {
  if (!deve.includes(message.author.id)) {
@@ -491,7 +491,7 @@ TimeMute : ${pretty(mm)}\n
                                  
 })
 
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 
     if (message.content.startsWith(prefix + 'info-mute')) {
  if (!deve.includes(message.author.id)) {
