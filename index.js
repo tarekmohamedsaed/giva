@@ -337,7 +337,6 @@ const manager = new GiveawaysManager(client, {
 client.giveawaysManager = manager;
 
 client.on('messageCreate', (message) => {
-    let giveaway = client.giveawaysManager.giveaways.find((g) => g.guildID === message.guild.id && g.prize === args.join(' ')) || client.giveawaysManager.giveaways.find((g) => g.guildID === message.guild.id && g.messageID === args[0]);
 
     if (message.content.includes(client.user.id)) return message.channel.send(`Prefix My : \`${prefix}\`
     list help  : \`${prefix}help\``);
