@@ -331,62 +331,86 @@ const manager = new GiveawaysManager(client, {
         botsCanWin: true,
         embedColor: "0054ff", // لون الامباد حق القيفاواي
         embedColorEnd: "f7001d", // لون الامباد لما ينتهي القيفاواي
-        reaction: '1136203370491813950' // رمز الرياكشن
+        reaction: '🎉' // رمز الرياكشن
     }
 });
 client.giveawaysManager = manager;
 
 client.on('messageCreate', (message) => {
-    const args = message.content.slice(prefix.length).trim().split(/ +/g);
-    const command = args.shift().toLowerCase();
     let giveaway = client.giveawaysManager.giveaways.find((g) => g.guildID === message.guild.id && g.prize === args.join(' ')) || client.giveawaysManager.giveaways.find((g) => g.guildID === message.guild.id && g.messageID === args[0]);
 
     if (message.content.includes(client.user.id)) return message.channel.send(`Prefix My : \`${prefix}\`
     list help  : \`${prefix}help\``);
+const args = message.content.slice(prefix.length).trim().split(/ +/g);
+const command = args.shift().toLowerCase();
 
-    if (command === 'start') {
-        if (message.author.bot) return;
-        if (message.channel.type === "dm") return;
+// البحث عن الجيف اواي الحالي
+let giveaway = client.giveawaysManager.giveaways.find((g) => g.guildID === message.guild.id && g.prize === args.join(' ')) || client.giveawaysManager.giveaways.find((g) => g.guildID === message.guild.id && g.messageID === args[0]);
 
-        if (!deve.includes(message.author.id)) {
-            return message.channel.send("❌ انت مش مسموحلك تستخدم الأمر ده!");
-        }
+// إذا كانت الرسالة تتضمن الـ ID الخاص بالبوت، رد على المستخدم برسالة توضح البريفكس
+if (message.content.includes(client.user.id)) return message.channel.send(`Prefix My : \`${prefix}\`\nlist help  : \`${prefix}help\``);
 
-        const low = db.get(`loa_${message.author.id}_${message.guild.id}`) || "ليس هناك شروط";
-        const by = db.get(`by_${message.guild.id}`) || message.author.id;
+// التحقق من الأمر
+if (command === 'start') {
+    if (message.author.bot) return; // تجاهل الرسائل من البوتات
+    if (message.channel.type === "dm") return; // تجاهل الرسائل من الـ DM
 
-        if (!args[0]) return message.channel.send(new Discord.MessageEmbed().setColor("0054ff")
-            .setDescription(`> Usage: ${prefix}start [time] [winners] [prize]\n ${prefix}start 1d 1w nitro classic`));
-
-        if (!args[2]) return message.channel.send(new Discord.MessageEmbed().setColor("0054ff")
-            .setDescription(`> Usage: ${prefix}start [time] [winners] [prize]\n ${prefix}start 1d 1w nitro classic`));
-
-        client.giveawaysManager.start(message.channel, {
-            time: ms(args[0]),
-            winnerCount: parseInt(args[1]),
-            prize: args.slice(2).join(' '),
-            lastChance: {
-                enabled: true,
-                content: '⚠️ **  جارئ الانتهاء الان  !** ⚠️',
-                threshold: 10000,
-                embedColor: '0054ff'
-            },
-            messages: {
-                giveaway: `**<:gift:1136203370491813950> **جيفاوي** <:gift:1136203370491813950>\nاضغط علي <:gift:1136203370491813950> حتي تشترك في الجيف اوي**`, // رسالة القيف اواي لما يبدأ
-                inviteToParticipate: `**الشروط : ${low}**  <:bin:1136203361067216966> \n`, // الرسالة في وسط الامباد لما يبلش القيف اواي
-                giveawayEnded: `**end-Givaway**`, // رسالة القيف اواي لما يخلص
-                timeRemaining: `**التسليم من: <@${by}> <:catur:1136203421997879296>\nالوقت المتبقي : {duration} <:catur:1136203421997879296> **`,
-                winMessage: `<:memberr:1136203563291389983>** تم اختيار فائزين و هم ** : {winners}\n<:gift:1136203370491813950>** الجائزة **: **{prize}**\n <:mn:1136203510657073263> **رابط الجيف اوي : **[\`اضغط هنا\`](${message.url})\n<:bin:1136203361067216966> **الشروط المضافة لهذا الجيف اوي : ${low}**\n<:admin:1136203358970052680> **التسليم بواسطة : <@${by}>**\n`, // رسالة الفائز
-                embedFooter: message.guild.name,
-                noWinner: 'عدد رياكشن ضغطه الخادم فقط!',
-                hostedBy: `Hosted by : ${by}`,
-                winners: ` Winner(s) `,
-                endedAt: `End`,
-            }
-        }).then((gData) => {
-            console.log(gData);
-        });
+    // التحقق إذا كان المستخدم في قائمة المسموح لهم
+    if (!deve.includes(message.author.id)) {
+        return message.channel.send("❌ انت مش مسموحلك تستخدم الأمر ده!");
     }
+
+    // جلب الشروط من قاعدة البيانات
+    const low = db.get(`loa_${message.author.id}_${message.guild.id}`) || "ليس هناك شروط";
+    const by = db.get(`by_${message.guild.id}`) || message.author.id;
+
+    // التحقق من وجود المعاملات المطلوبة
+    if (!args[0]) return message.channel.send(new Discord.MessageEmbed().setColor("0054ff")
+        .setDescription(`> Usage: ${prefix}start [time] [winners] [prize]\n${prefix}start 1d 1w nitro classic`));
+
+    if (!args[1]) return message.channel.send(new Discord.MessageEmbed().setColor("0054ff")
+        .setDescription(`> Usage: ${prefix}start [time] [winners] [prize]\n${prefix}start 1d 1w nitro classic`));
+
+    if (!args[2]) return message.channel.send(new Discord.MessageEmbed().setColor("0054ff")
+        .setDescription(`> Usage: ${prefix}start [time] [winners] [prize]\n${prefix}start 1d 1w nitro classic`));
+
+    // تحقق من صحة الوقت المُدخل (مثل 1d, 2h)
+    const time = ms(args[0]);
+    if (!time) {
+        return message.channel.send(new Discord.MessageEmbed().setColor("0054ff")
+            .setDescription(`> الوقت غير صحيح، يرجى إدخال الوقت بتنسيق صحيح مثل: 1d, 2h, 1w`));
+    }
+
+    // تحقق من صحة عدد الفائزين (يجب أن يكون رقمًا)
+    const winners = parseInt(args[1]);
+    if (isNaN(winners) || winners <= 0) {
+        return message.channel.send(new Discord.MessageEmbed().setColor("0054ff")
+            .setDescription(`> عدد الفائزين غير صحيح، يرجى إدخال رقم صحيح أكبر من 0`));
+    }
+
+    // تحقق من أن الجائزة ليست فارغة
+    const prize = args.slice(2).join(' ');
+    if (!prize) {
+        return message.channel.send(new Discord.MessageEmbed().setColor("0054ff")
+            .setDescription(`> الجائزة غير صحيحة، يرجى تحديد الجائزة بشكل صحيح.`));
+    }
+
+    // تنفيذ إنشاء الجيف اواي
+    client.giveawaysManager.start(message.channel, {
+        time: time,
+        prize: prize,
+        winnerCount: winners,
+        hostedBy: message.author,
+        description: low,
+    }).then(() => {
+        message.channel.send(new Discord.MessageEmbed().setColor("0054ff")
+            .setDescription(`> الجيف اوي بدأ بنجاح! 🎉\n**الوقت المتبقي**: ${args[0]}\n**عدد الفائزين**: ${winners}\n**الجائزة**: ${prize}`));
+    }).catch(err => {
+        console.error(err);
+        message.channel.send("حدث خطأ أثناء بدء الجيف اوي.");
+    });
+}
+
 
     if (command === 'reroll') {
         if (message.author.bot) return;
