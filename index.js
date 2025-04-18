@@ -317,7 +317,7 @@ const { settings } = require('cluster');
 
 
 */
-
+/*
 const { GiveawaysManager } = require('discord-giveaways');
 const { settings } = require('cluster');
 const ms = require('ms'); // npm install ms
@@ -503,7 +503,150 @@ if (command === 'start') {
         });
     }
 });
+*/
 
+
+client = new Discord.Client(),
+settings = {
+    prefix: "^"
+};
+
+const { GiveawaysManager } = require("discord-giveaways");
+const manager = new GiveawaysManager(client, {
+        storage: __dirname+"/giveaways.json",
+        updateCountdownEvery: 5000,
+
+        botsCanWin: false,
+        exemptPermissions: [ "MANAGE_MESSAGES", "MANAGE_GUILD", "ADMINISTRATOR" ],
+        embedColor: "#FF0000",
+        embedColorEnd: "BLACK",
+        reaction: "🎉"
+    
+});
+
+client.giveawaysManager = manager;
+ 
+
+
+
+client.on("messageCreate", (message) => {
+ 
+    const ms = require("ms"); 
+    const args = message.content.slice(settings.prefix.length).trim().split(/ +/g);
+    const command = args.shift().toLowerCase();
+ 
+    if(command === "create"){
+    
+        if (!deve.includes(message.author.id)) {
+            return message.channel.send("❌ انت مش مسموحلك تستخدم الأمر ده!");
+        }
+                         let time = args[0];
+                      let winners = args[1];
+                      let prize = args.slice(2).join(" ")
+                      if (!time || !winners || !prize) return message.reply(`Wrong Use | Usage : \n **${prefix}create** <time> <winners> <prize>`)
+                      if (isNaN(winners)) return message.reply(`Winner Need To Be Number`)
+                      if (!time) return message.reply(`1s , 1m , 1h , 1w , 1mn`)
+      
+client.giveawaysManager.start(message.channel, {
+    time: ms(args[0]),
+    winnerCount: parseInt(args[1]),
+    prize: args.slice(2).join(' '),
+    lastChance: {
+        enabled: true,
+        content: '⚠️ **  جارئ الانتهاء الان  !** ⚠️',
+        threshold: 10000,
+        embedColor: '0054ff'
+    },
+    messages: {
+        giveaway: `**<:gift:1136203370491813950> **جيفاوي** <:gift:1136203370491813950>\n
+اضغط علي <:gift:1136203370491813950> حتي تشترك في الجيف اوي**`, // رسالة القيف اوي لما يبدأ
+        inviteToParticipate: `**الشروط : ${low}**  <:bin:1136203361067216966> \n`, // الرسالة في وسط الإيمباد عندما يبدأ القيف اوي
+        giveawayEnded: `**end-Givaway**`, // رسالة القيف اوي عندما ينتهي
+        timeRemaining: `**التسليم من: <@${by}> <:catur:1136203421997879296>\n
+                          الوقت المتبقي : 
+                        {duration} <:catur:1136203421997879296> **`, // الرسالة التي تعرض الوقت المتبقي
+        winMessage: `<:memberr:1136203563291389983>** تم اختيار فائزين و هم ** : {winners}\n 
+<:gift:1136203370491813950>** الجائزة **: **{prize}**\n
+ <:mn:1136203510657073263> **رابط الجيف اوي : **[\`اضغط هنا\`](${message.url})\n
+ <:bin:1136203361067216966> **الشروط المضافة الي هاذا الجيف اوي : ${low}**\n
+<:admin:1136203358970052680> **التسليم بواسطة : <@${by}>**\n`, // رسالة عندما يربح شخص
+        embedFooter: message.guild.name,
+        noWinner: 'عدد رياكشن ضغطه الخادم فقط ! ',
+        hostedBy: `Hosted by : ${by}`,
+        winners: `Winner(s)`,
+        endedAt: `End`
+    }
+}).then((gData) => {
+    console.log(gData);
+}).catch(err => {
+    console.error("حدث خطأ: ", err);
+});
+
+
+
+client.on("messageCreate", (message) => {
+ 
+    const ms = require("ms"); 
+    const args = message.content.slice(settings.prefix.length).trim().split(/ +/g);
+    const command = args.shift().toLowerCase();
+ 
+    if(command === "reroll"){
+      
+        if (!deve.includes(message.author.id)) {
+            return message.channel.send("❌ انت مش مسموحلك تستخدم الأمر ده!");
+        }
+      let messageID = args[0];
+      if(!messageID) messageID = "**Not found :x: **";
+        client.giveawaysManager.reroll(messageID).then(() => {
+            message.channel.send("Success! Giveaway rerolled! :tada:");
+        }).catch((err) => {
+            message.channel.send("⛔ No giveaway found for "+messageID+", please check and try again");
+        });
+    }
+ 
+});
+
+
+
+client.on("messageCreate", (message) => {
+ 
+    const args = message.content.slice(settings.prefix.length).trim().split(/ +/g);
+    const command = args.shift().toLowerCase();
+ 
+    if(command === "end"){
+
+        if (!deve.includes(message.author.id)) {
+            return message.channel.send("❌ انت مش مسموحلك تستخدم الأمر ده!");
+        }
+      let messageID = args[0];
+        client.giveawaysManager.delete(messageID).then(() => {
+            message.channel.send("Success! Giveaway Ended 🎊 !");
+        }).catch((err) => {
+          if(!messageID) messageID = "**None :x: **";
+            message.channel.send("⛔ No giveaway found for "+messageID+", please check and try again");
+        });
+    }
+ 
+});
+
+
+
+//help
+
+
+client.on('messageCreate', message => {
+  var helplist = `**قائمة الاوامر  
+
+> ${prefix}create <time> <winners> <prize> : لعمل جيف اواي
+> ${prefix}end + Message Id : لانهاء جيف اواي بدون تحديد الفائز
+> ${prefix}reroll + Message Id : لاختيار شخص اخر للفوز ب الجيف اواي**`
+  if(message.content === prefix + 'help') {
+            message.delete(1000)
+    let e = '** جاري الارســال .. :envelope_with_arrow: **'
+	  message.reply(e).then(m => m.delete(1000))
+	  message.author.send(helplist).catch(error => message.reply('** لم اتمكن من الارسال الاوامر لك , يرجي فتح خاصك :negative_squared_cross_mark:**'))
+}
+});
 
 
 
