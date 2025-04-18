@@ -71,7 +71,7 @@ client.on('message', async message => {
   if (command === `set-low`) {
     const deve = ["771223207536623686","877484293813833761","792453054150082560"]
 
-            if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
+            if(!message.member.permissions.has("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
 
 if(!args) return message.channel.send("اكتب الشروط حقت الجيف اوي")
 message.channel.send(`تم اضافة ${args.join(" ")} الي شروط القيف اوي`).then(()=> {
@@ -93,7 +93,7 @@ client.on('message', async message => {
   if (command === `remove-low`) {
 
 
-            if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
+            if(!message.member.permissions.has("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
 
 message.channel.send(`**تم ازالة شروط القيفاوي **\`<:give:932419582659014666>\``).then(()=> {
 
@@ -111,7 +111,7 @@ client.on('message', async message => {
   if (command === `remove-by`) {
 
 
-            if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
+            if(!message.member.permissions.has("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
 
 message.channel.send(`**تم ازالة مسلمين القيفاوي **\`<:give:932419582659014666>\``).then(()=> {
 
@@ -135,7 +135,7 @@ client.on('message', async message => {
          var user = message.mentions.members.first() || client.users.cache.get(args[1]);
 
 
-            if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
+            if(!message.member.permissions.has("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
 if(!user) return message.channel.send("اكتب ايدي او منشن المسلم  بتاع الجيف اوي")
 message.channel.send(`تم اضافة ${user} الي مسلمين القيف اوي`).then(()=> {
 
@@ -172,7 +172,7 @@ const { settings } = require('cluster');
         if (command === 'start') {
           if(message.author.bot) return;
           if(message.channel.type === "dm") return;
-            if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
+            if(!message.member.permissions.has("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
             
     const low = db.get(`loa_${message.author.id}_${message.guild.id}`) || "ليس هناك شروط"
         const by = db.get(`by_${message.guild.id}`) || message.author.id
@@ -234,7 +234,7 @@ const { settings } = require('cluster');
         if (command === 'reroll') {
           if(message.author.bot) return;
           if(message.channel.type === "dm") return;
-            if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
+            if(!message.member.permissions.has("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
                 const messageID = args[0];
                 if(!args[0]) return message.channel.send(new Discord.MessageEmbed()
             .setDescription(`> Usage: ${prefix}reroll [giveaway message ID]\n ${prefix}reroll 44564686464886546978`))
@@ -251,7 +251,7 @@ const { settings } = require('cluster');
             if (command === 'edit') {
               if(message.author.bot) return;
           if(message.channel.type === "dm") return;
-                if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
+                if(!message.member.permissions.has("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
                 const messageID = args[0];
                 if(!args[0]) return message.channel.send(new Discord.MessageEmbed()
                 .setColor("c32b61")
@@ -275,7 +275,7 @@ const { settings } = require('cluster');
             if (command === 'delete') {
               if(message.author.bot) return;
           if(message.channel.type === "dm") return;
-                if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
+                if(!message.member.permissions.has("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
                 const messageID = args[0];
                 if(!args[0]) return message.channel.send(new Discord.MessageEmbed()
 .setColor("c32b61")
@@ -291,7 +291,7 @@ const { settings } = require('cluster');
             if (command === 'end') {
               if(message.author.bot) return;
           if(message.channel.type === "dm") return;
-                if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
+                if(!message.member.permissions.has("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
                 const messageID = args[0];
                 if(!args[0]) return message.channel.send(new Discord.MessageEmbed()
                                 .setColor("c32b61")
