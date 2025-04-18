@@ -67,7 +67,7 @@ const prefixx = prefix
 
 
 const test = ["790598733771309076"]
-client.on('message', async message => {
+client.on('messageCreate', async message => {
   
     if(message.channel.type === "dm") return;
   
@@ -89,7 +89,7 @@ db.set(`loa_${message.author.id}_${message.guild.id}`,args.join(" "))
 //
 
 const men = "**\@eveyone**"
-client.on('message', async message => {
+client.on('messageCreate', async message => {
   
     if(message.channel.type === "dm") return;
   
@@ -108,7 +108,7 @@ db.delete(`loa_${message.author.id}_${message.guild.id}`)
 })
   }
 });
-client.on('message', async message => {
+client.on('messageCreate', async message => {
   
     if(message.channel.type === "dm") return;
   
@@ -131,7 +131,7 @@ db.delete(`by_${message.guild.id}`)
 const db = require('quick.db')
 
 
-client.on('message', async message => {
+client.on('messageCreate', async message => {
   
     if(message.channel.type === "dm") return;
   
