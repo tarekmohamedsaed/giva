@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-
+require('events').EventEmitter.defaultMaxListeners = 30;  // يمكنك تعديل الرقم حسب الحاجة
 app.listen(() => console.log("Server started"));
 
 app.use('/ping', (req, res) => {
@@ -165,7 +165,7 @@ const { settings } = require('cluster');
             botsCanWin: true,
             embedColor: "0054ff",//لون الامباد حق القيفاواي
             embedColorEnd: "f7001d",//لون الامباد حق القيفاواي لما يخلص
-            reaction: '1136203370491813950'
+            reaction: '🎉'
         }
     });
     client.giveawaysManager = manager;
