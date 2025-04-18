@@ -61,6 +61,7 @@ client.on('ready', async () => {
 const prefix = '..';
 
 const prefixx = prefix
+    const deve = ["790598733771309076","771223207536623686","792453054150082560"]
 
 
 
@@ -73,10 +74,10 @@ client.on('message', async message => {
     const args = message.content.slice(prefixx.length).trim().split(/ +/);   
       const command = args.shift().toLowerCase();
   if (command === `set-low`) {
-    const deve = ["790598733771309076","877484293813833761","792453054150082560"]
 
-            if(!message.member.permissions.has("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
-
+ if (!deve.includes(message.author.id)) {
+    return message.channel.send("❌ انت مش مسموحلك تستخدم الأمر ده!");
+  }
 if(!args) return message.channel.send("اكتب الشروط حقت الجيف اوي")
 message.channel.send(`تم اضافة ${args.join(" ")} الي شروط القيف اوي <:bin:1136203361067216966> `).then(()=> {
 
@@ -97,8 +98,9 @@ client.on('message', async message => {
   if (command === `remove-low`) {
 
 
-            if(!message.member.hasPermission.has("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
-
+ if (!deve.includes(message.author.id)) {
+    return message.channel.send("❌ انت مش مسموحلك تستخدم الأمر ده!");
+  }
 message.channel.send(`**تم ازالة شروط القيفاوي **<:bin:1136203361067216966>`).then(()=> {
 
 db.delete(`loa_${message.author.id}_${message.guild.id}`)
@@ -115,8 +117,9 @@ client.on('message', async message => {
   if (command === `remove-by`) {
 
 
-            if(!message.member.hasPermission.has("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
-
+ if (!deve.includes(message.author.id)) {
+    return message.channel.send("❌ انت مش مسموحلك تستخدم الأمر ده!");
+  }
 message.channel.send(`**تم ازالة مسلمين القيفاوي **<:admin:1136203358970052680>`).then(()=> {
 
 db.delete(`by_${message.guild.id}`)
@@ -139,8 +142,9 @@ client.on('message', async message => {
          var user = message.mentions.members.first() || client.users.cache.get(args[1]);
 
 
-            if(!message.member.hasPermission.has("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
-if(!user) return message.channel.send("اكتب ايدي او منشن المسلم  بتاع الجيف اوي")
+ if (!deve.includes(message.author.id)) {
+    return message.channel.send("❌ انت مش مسموحلك تستخدم الأمر ده!");
+  }if(!user) return message.channel.send("اكتب ايدي او منشن المسلم  بتاع الجيف اوي")
 message.channel.send(` <:admin:1136203358970052680> تم اضافة ${user} الي مسلمين القيف اوي`).then(()=> {
 
 db.set(`by_${message.guild.id}`,user.id)
@@ -176,8 +180,9 @@ const { settings } = require('cluster');
         if (command === 'start') {
           if(message.author.bot) return;
           if(message.channel.type === "dm") return;
-            if(!message.member.hasPermission.has("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
-            
+ if (!deve.includes(message.author.id)) {
+    return message.channel.send("❌ انت مش مسموحلك تستخدم الأمر ده!");
+  }            
     const low = db.get(`loa_${message.author.id}_${message.guild.id}`) || "ليس هناك شروط"
         const by = db.get(`by_${message.guild.id}`) || message.author.id
     //          if(args !== "1s","2s","3s","4s","5s","6s","7s","8s","9s","10s") return message.channel.send(new Discord.MessageEmbed()
@@ -235,7 +240,9 @@ const { settings } = require('cluster');
         if (command === 'reroll') {
           if(message.author.bot) return;
           if(message.channel.type === "dm") return;
-            if(!message.member.hasPermission.has("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
+ if (!deve.includes(message.author.id)) {
+    return message.channel.send("❌ انت مش مسموحلك تستخدم الأمر ده!");
+  }
                 const messageID = args[0];
                 if(!args[0]) return message.channel.send(new Discord.MessageEmbed()
             .setDescription(`> Usage: ${prefix}reroll [giveaway > ID]\n ${prefix}reroll 44564686464886546978`))
@@ -252,8 +259,9 @@ const { settings } = require('cluster');
             if (command === 'edit') {
               if(message.author.bot) return;
           if(message.channel.type === "dm") return;
-                if(!message.member.hasPermission.has("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
-                const messageID = args[0];
+ if (!deve.includes(message.author.id)) {
+    return message.channel.send("❌ انت مش مسموحلك تستخدم الأمر ده!");
+  }                const messageID = args[0];
                 if(!args[0]) return message.channel.send(new Discord.MessageEmbed()
                 .setColor("0054ff")
             .setDescription(`> Usage: ${prefix}edit [giveaway message ID] [time] [winners] [prize]\n ${prefix}edit 6468456486465811 1d 1w nitro classic`))
@@ -273,8 +281,9 @@ const { settings } = require('cluster');
             if (command === 'delete') {
               if(message.author.bot) return;
           if(message.channel.type === "dm") return;
-                if(!message.member.hasPermission.has("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
-                const messageID = args[0];
+ if (!deve.includes(message.author.id)) {
+    return message.channel.send("❌ انت مش مسموحلك تستخدم الأمر ده!");
+  }                const messageID = args[0];
                 if(!args[0]) return message.channel.send(new Discord.MessageEmbed()
 .setColor("0054ff")
 
@@ -289,8 +298,9 @@ const { settings } = require('cluster');
             if (command === 'end') {
               if(message.author.bot) return;
           if(message.channel.type === "dm") return;
-                if(!message.member.hasPermission.has("ADMINISTRATOR")) return message.channel.send('you not allowed to use this!')
-                const messageID = args[0];
+ if (!deve.includes(message.author.id)) {
+    return message.channel.send("❌ انت مش مسموحلك تستخدم الأمر ده!");
+  }                const messageID = args[0];
                 if(!args[0]) return message.channel.send(new Discord.MessageEmbed()
                                 .setColor("0054ff")
 
@@ -341,8 +351,9 @@ let user = message.mentions.members.first()
 
     if (message.content.startsWith(prefix + 'mute')) {
 
-if (!test.includes(message.author.id)) return;
-
+ if (!deve.includes(message.author.id)) {
+    return message.channel.send("❌ انت مش مسموحلك تستخدم الأمر ده!");
+  }
         let args = message.content.split(' ').slice(1)
         let user = message.mentions.members.first()
 
@@ -430,8 +441,9 @@ TimeMute : ${pretty(mmm)}
       client.on('message', async message => {
 
    if (message.content.startsWith(prefix + 'unmute')) {
-if (!test.includes(message.author.id)) return;
-        let muteRole = message.guild.roles.cache.find(role => role.name == 'Muted');
+ if (!deve.includes(message.author.id)) {
+    return message.channel.send("❌ انت مش مسموحلك تستخدم الأمر ده!");
+  }        let muteRole = message.guild.roles.cache.find(role => role.name == 'Muted');
 let user = message.mentions.members.first()
 if (!user) return message.channel.send('❌ I cant find this member')
 if (!user.roles.cache.get(muteRole.id)) return message.channel.send(`❌ This member isn't muted`)
@@ -482,6 +494,9 @@ TimeMute : ${pretty(mm)}\n
 client.on('message', async message => {
 
     if (message.content.startsWith(prefix + 'info-mute')) {
+ if (!deve.includes(message.author.id)) {
+    return message.channel.send("❌ انت مش مسموحلك تستخدم الأمر ده!");
+  }
         let muteRole = message.guild.roles.cache.find(role => role.name == 'Muted');
 
 
