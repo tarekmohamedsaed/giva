@@ -549,39 +549,28 @@ client.on("messageCreate", (message) => {
       
 client.giveawaysManager.start(message.channel, {
     time: ms(args[0]),
-    winnerCount: parseInt(args[1]),
-    prize: args.slice(2).join(' '),
-    lastChance: {
-        enabled: true,
-        content: '⚠️ **  جارئ الانتهاء الان  !** ⚠️',
-        threshold: 10000,
-        embedColor: '0054ff'
-    },
-    messages: {
-        giveaway: `**<:gift:1136203370491813950> **جيفاوي** <:gift:1136203370491813950>\n
-اضغط علي <:gift:1136203370491813950> حتي تشترك في الجيف اوي**`, // رسالة القيف اوي لما يبدأ
-        inviteToParticipate: `**الشروط : ${low}**  <:bin:1136203361067216966> \n`, // الرسالة في وسط الإيمباد عندما يبدأ القيف اوي
-        giveawayEnded: `**end-Givaway**`, // رسالة القيف اوي عندما ينتهي
-        timeRemaining: `**التسليم من: <@${by}> <:catur:1136203421997879296>\n
-                          الوقت المتبقي : 
-                        {duration} <:catur:1136203421997879296> **`, // الرسالة التي تعرض الوقت المتبقي
-        winMessage: `<:memberr:1136203563291389983>** تم اختيار فائزين و هم ** : {winners}\n 
-<:gift:1136203370491813950>** الجائزة **: **{prize}**\n
- <:mn:1136203510657073263> **رابط الجيف اوي : **[\`اضغط هنا\`](${message.url})\n
- <:bin:1136203361067216966> **الشروط المضافة الي هاذا الجيف اوي : ${low}**\n
-<:admin:1136203358970052680> **التسليم بواسطة : <@${by}>**\n`, // رسالة عندما يربح شخص
-        embedFooter: message.guild.name,
-        noWinner: 'عدد رياكشن ضغطه الخادم فقط ! ',
-        hostedBy: `Hosted by : ${by}`,
-        winners: `Winner(s)`,
-        endedAt: `End`
+    prize: args.slice(2).join(" "),
+            winnerCount: parseInt(args[1]),
+      messages: {
+       giveaway: "🎉🎉  **NEW GIVEAWAY** 🎉🎉",
+        giveawayEnded: "@everyone\n\n🎉🎉 **GIVEAWAY ENDED** 🎉🎉",
+        timeRemaining: "Time remaining: **{duration}**! ⏲️ ",
+        inviteToParticipate: "**React with 🎉 to participate this giveaway **!",
+        winMessage: "Congratulations, {winners}! You won **{prize}**🎊🎉 !",
+        embedFooter: "Giveaways",
+        noWinner: "😟 No Winner !",
+        winners: "winner(s) 🥳",
+        endedAt: "Ended at",
+        units: {
+            seconds: "seconds",
+            minutes: "minutes",
+            hours: "hours",
+            days: "days"
+        }
     }
-}).then((gData) => {
-    console.log(gData);
-}).catch(err => {
-    console.error("حدث خطأ: ", err);
 });
-    })
+    }
+});
 
 
 client.on("messageCreate", (message) => {
