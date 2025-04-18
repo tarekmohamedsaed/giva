@@ -9,18 +9,12 @@ app.use('/ping', (req, res) => {
 const Discord = require('discord.js');
 
 const { Client, Intents } = require('discord.js');
-
-
 const client = new Client({
   intents: [
-    Intents.FLAGS.GUILDS,                    // للوصول إلى الخوادم
-    Intents.FLAGS.GUILD_MESSAGES,             // للوصول إلى الرسائل داخل الخوادم
-    Intents.FLAGS.MESSAGE_CONTENT,            // للوصول إلى محتوى الرسائل
-    Intents.FLAGS.GUILD_MEMBERS,              // للوصول إلى معلومات الأعضاء
-    Intents.FLAGS.GUILD_BANS,                 // للوصول إلى بيانات الحظر في الخوادم
-    Intents.FLAGS.GUILD_INVITES,              // للوصول إلى الدعوات في الخوادم
-    Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,  // للوصول إلى الـ Emojis و Stickers
-  ],
+    Intents.FLAGS.GUILDS,              // للوصول إلى معلومات الخوادم
+    Intents.FLAGS.GUILD_MESSAGES,      // للوصول إلى الرسائل في الخوادم
+    Intents.FLAGS.MESSAGE_CONTENT,     // للوصول إلى محتوى الرسائل
+  ]
 });
 
 
