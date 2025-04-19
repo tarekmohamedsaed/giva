@@ -680,4 +680,4 @@ client.on('ready', () => {
     
     
     
-client.login('ODEzMDExMTMzNzE5NzczMjE1.GondE8.oO_HLT5pp1D8I1Xf9YNT8hlJX2A6nvkGJ8Ve-A');
+client.login(process.env.token);
